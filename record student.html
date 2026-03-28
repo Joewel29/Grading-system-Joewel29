@@ -6,28 +6,22 @@
 <title>Student Records - BSIT Grading System</title>
 <link rel="stylesheet" href="index.css">
 <style>
-  /* Viewer-specific styles */
-  .records-header { text-align: center; margin-bottom: 20px; }
-  .final-grade.passed { color: #00ff88; font-weight: bold; }
-  .final-grade.failed { color: #ff4d4d; font-weight: bold; }
-  #recordTable th:nth-child(1) { width: 15%; }
-  #recordTable th:nth-child(2) { width: 12%; }
-  #recordTable th:nth-child(n+3):nth-child(-n+7) { width: 10%; }
-  #recordTable th:nth-child(8) { width: 12%; }
-  #recordTable th:nth-child(9) { width: 12%; }
-  .back-btn { background: #660000; padding: 12px 24px; font-size: 16px; margin-bottom: 20px; }
+  /* Viewer-specific styles - now in main CSS, but keep for overrides */
+  .back-btn { margin-bottom: 1.5rem; }
 </style>
 </head>
 <body>
 
 <header>
-    <div class="logo-container">
-        <img src="passi city college logo.jpg" alt="PCC Logo">
-        <div class="logo-text">Passi City College</div>
-    </div>
-    <div class="logo-container">
-        <img src="BSIT 2.png" alt="BSIT Logo">
-        <div class="logo-text">Bachelor of Science Information Technology</div>
+    <div class="logo-row">
+        <div class="logo-container">
+            <img src="passi city college logo.jpg" alt="PCC Logo">
+            <div class="logo-text">Passi City College</div>
+        </div>
+        <div class="logo-container">
+            <img src="BSIT 2.png" alt="BSIT Logo">
+            <div class="logo-text">Bachelor of Science Information Technology</div>
+        </div>
     </div>
     <h1>Student Grading Records</h1>
 </header>
@@ -35,24 +29,26 @@
 <div class="container">
     <button class="back-btn" onclick="goBack()">⬅ Back to Grading</button>
 
-    <table>
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Section</th>
-                <th>Quiz (20%)</th>
-                <th>Lab (30%)</th>
-                <th>Assign (10%)</th>
-                <th>Attend (10%)</th>
-                <th>Major (30%)</th>
-                <th>Final Grade</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody id="recordTable">
-            <!-- Records populated by JS -->
-        </tbody>
-    </table>
+    <div class="table-wrapper">
+        <table id="recordTable">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Section</th>
+                    <th>Quiz (20%)</th>
+                    <th>Lab (30%)</th>
+                    <th>Assign (10%)</th>
+                    <th>Attend (10%)</th>
+                    <th>Major (30%)</th>
+                    <th>Final Grade</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Records populated by JS -->
+            </tbody>
+        </table>
+    </div>
 </div>
 
 <script>
@@ -69,13 +65,18 @@ function getRemark(score) {
 }
 
 function displayRecords() {
-    const table = document.getElementById('recordTable');
-    table.innerHTML = '';
+    const tbody = document.querySelector('#recordTable tbody');
+    tbody.innerHTML = '';
 
     let records = JSON.parse(localStorage.getItem('records')) || [];
     
+    if (records.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="9" style="text-align:center; padding:2.5rem; font-style:italic; background:rgba(255,255,255,0.1);">No records yet. Add from Grading page!</td></tr>';
+        return;
+    }
+    
     records.forEach((record, index) => {
-        const row = table.insertRow();
+        const row = tbody.insertRow();
         row.innerHTML = `
             <td title="${record.name}">${record.name.length > 20 ? record.name.substring(0,20)+'...' : record.name}</td>
             <td>${record.section}</td>
@@ -85,13 +86,9 @@ function displayRecords() {
             <td>${(record.attendance || 0).toFixed(1)} ${getRemark(record.attendance)}</td>
             <td>${(record.majorExam || 0).toFixed(1)} ${getRemark(record.majorExam)}</td>
             <td class="final-grade ${record.total >= 75 ? 'passed' : 'failed'}">${(record.total || 0).toFixed(2)} ${getRemark(record.total)}</td>
-            <td><button onclick="deleteRecord(${index})" style="background:#cc0000;">Delete</button></td>
+            <td><button onclick="deleteRecord(${index})">Delete</button></td>
         `;
     });
-    
-    if (records.length === 0) {
-        table.innerHTML = '<tr><td colspan="9" style="text-align:center; padding:40px; font-style:italic;">No records yet. Add from Grading page!</td></tr>';
-    }
 }
 
 function deleteRecord(index) {
