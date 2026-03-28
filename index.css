@@ -4,13 +4,19 @@
     padding: 0;
 }
 
+html {
+    font-size: 16px; /* Base for rem */
+}
+
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: #fff;
     background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('PCC background.jpg') center/cover fixed;
     min-height: 100vh;
+    line-height: 1.5;
 }
 
+/* Fixed background overlay */
 body::before {
     content: '';
     position: fixed;
@@ -19,162 +25,185 @@ body::before {
     z-index: -1;
 }
 
-/* Header - Consistent */
+/* Header - Responsive flex */
 header {
     background: linear-gradient(135deg, #990000 0%, #660000 100%);
-    padding: 20px;
+    padding: clamp(1rem, 3vw, 1.5rem);
     text-align: center;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    box-shadow: 0 0.25rem 0.9375rem rgba(0,0,0,0.5);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.logo-row {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
 }
 
 .logo-container {
-    display: inline-flex;
+    display: flex;
     align-items: center;
-    gap: 12px;
-    margin: 10px;
+    gap: 0.75rem;
 }
 
 .logo-container img {
-    height: 70px;
-    border-radius: 12px;
-    border: 3px solid rgba(255,255,255,0.3);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    height: clamp(3rem, 15vh, 5rem);
+    max-width: 100%;
+    object-fit: cover;
+    border-radius: 0.75rem;
+    border: 0.1875rem solid rgba(255,255,255,0.3);
+    box-shadow: 0 0.25rem 0.75rem rgba(0,0,0,0.4);
     animation: float 3s ease-in-out infinite;
 }
 
 @keyframes float {
     0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
+    50% { transform: translateY(-0.625rem); }
 }
 
 .logo-text {
-    font-size: 16px;
+    font-size: clamp(0.875rem, 2.5vw, 1.125rem);
     font-weight: 600;
     white-space: nowrap;
 }
 
 header h1 {
-    margin: 15px 0;
-    font-size: 28px;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+    margin: 0;
+    font-size: clamp(1.5rem, 6vw, 2rem);
+    text-shadow: 0.125rem 0.125rem 0.25rem rgba(0,0,0,0.7);
 }
 
 /* Container */
 .container {
-    max-width: 1400px;
-    margin: 30px auto;
+    max-width: min(95vw, 90rem);
+    margin: clamp(1rem, 5vh, 2rem) auto;
     background: rgba(153,0,0,0.92);
-    padding: 30px;
-    border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+    padding: clamp(1rem, 5vw, 2rem);
+    border-radius: 1.25rem;
+    box-shadow: 0 0.625rem 1.875rem rgba(0,0,0,0.6);
 }
 
-/* Inputs */
+/* Student Edit Inputs - Mobile stack */
 .edit-student {
-    text-align: center;
-    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
 }
 
 .edit-student input {
-    padding: 12px;
-    border-radius: 10px;
+    padding: clamp(0.75rem, 2vw, 1rem);
+    border-radius: 0.625rem;
     border: none;
-    font-size: 16px;
-    background: rgba(255,255,255,0.9);
+    font-size: clamp(1rem, 3vw, 1.125rem);
+    background: rgba(255,255,255,0.95);
     color: #333;
-    margin: 0 10px;
-    min-width: 200px;
+    width: 100%;
+    max-width: 20rem;
+    box-sizing: border-box;
 }
 
 .student-info {
     text-align: center;
-    margin: 20px 0;
-    font-size: 18px;
+    margin: 1.25rem 0;
+    font-size: clamp(1rem, 2.5vw, 1.25rem);
     font-weight: 500;
-    padding: 15px;
-    background: rgba(102,0,0,0.5);
-    border-radius: 10px;
+    padding: clamp(0.75rem, 2vw, 1rem);
+    background: rgba(102,0,0,0.6);
+    border-radius: 0.625rem;
 }
 
-/* Table General */
+/* Table Responsive Wrapper */
+.table-wrapper {
+    overflow-x: auto;
+    margin: 1.25rem 0;
+    border-radius: 0.75rem;
+    box-shadow: 0 0.25rem 0.75rem rgba(0,0,0,0.3);
+}
+
 table {
     width: 100%;
     border-collapse: collapse;
-    margin: 20px 0;
-    border-radius: 12px;
-    overflow: hidden;
-    min-width: 1000px;
+    min-width: 45rem; /* Allows scroll on mobile */
+    font-size: clamp(0.8125rem, 2vw, 0.9375rem);
 }
 
 th, td {
-    padding: 12px 8px;
+    padding: clamp(0.5rem, 1.5vw, 0.875rem) 0.5rem;
     text-align: center;
     border-bottom: 1px solid rgba(255,255,255,0.3);
+    white-space: nowrap;
 }
 
 th {
     background: linear-gradient(135deg, #660000, #330000);
     font-weight: 600;
-    font-size: 14px;
-    position: sticky;
-    top: 0;
-    z-index: 5;
+    position: relative;
 }
 
-/* Grading Table */
-#gradeTable input[type="number"] {
-    width: 70px;
-    padding: 6px;
-    border-radius: 6px;
-    border: none;
-    text-align: center;
-}
-
-/* Records Viewer Table */
+/* Specific table widths for records */
 #recordTable th:nth-child(1) { width: 15%; }
 #recordTable th:nth-child(2) { width: 10%; }
-#recordTable th:nth-child(3) { width: 10%; }  /* Quiz */
-#recordTable th:nth-child(4) { width: 10%; }  /* Lab */
-#recordTable th:nth-child(5) { width: 9%; }   /* Assign */
-#recordTable th:nth-child(6) { width: 9%; }   /* Attend */
-#recordTable th:nth-child(7) { width: 10%; }  /* Major */
-#recordTable th:nth-child(8) { width: 12%; }  /* Final */
-#recordTable th:nth-child(9) { width: 10%; }  /* Action */
+/* Component columns approx 10% each */
+#recordTable th:nth-child(n+3):nth-child(-n+7) { width: 10%; }
+#recordTable th:nth-child(8) { width: 12%; } /* Final */
+#recordTable th:nth-child(9) { width: 13%; } /* Action */
 
-.final-grade.passed { color: #00ff88 !important; font-weight: bold; }
-.final-grade.failed { color: #ff4444 !important; font-weight: bold; }
+/* Grade inputs */
+#gradeTable input[type="number"] {
+    width: 4.5rem;
+    padding: 0.375rem;
+    border-radius: 0.375rem;
+    border: none;
+    text-align: center;
+    font-size: 1rem;
+}
 
+/* Hover effects */
 tbody tr:hover {
     background: rgba(255,255,255,0.15);
-    transform: scale(1.01);
-    transition: all 0.2s;
+    transition: all 0.2s ease;
 }
 
 /* Buttons */
+.btn-group {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem;
+    margin: 1.5rem 0;
+}
+
 .calculate-btn, .back-btn {
-    padding: 12px 24px;
+    padding: clamp(0.75rem, 2vw, 1rem) 1.5rem;
     border: none;
-    border-radius: 10px;
+    border-radius: 0.625rem;
     background: linear-gradient(135deg, #330000, #220000);
     color: white;
-    font-size: 16px;
+    font-size: clamp(0.9375rem, 2.5vw, 1.125rem);
     font-weight: 500;
     cursor: pointer;
-    margin: 8px;
-    transition: all 0.3s;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    flex: 1;
+    min-width: 8rem;
+    max-width: 12rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 0.25rem 0.75rem rgba(0,0,0,0.3);
 }
 
 .calculate-btn:hover, .back-btn:hover {
     background: linear-gradient(135deg, #440000, #330000);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+    transform: translateY(-0.125rem);
+    box-shadow: 0 0.375rem 1.25rem rgba(0,0,0,0.4);
 }
 
 button[onclick*="delete"] {
     background: linear-gradient(135deg, #cc0000, #990000) !important;
-    padding: 8px 16px;
-    font-size: 13px;
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
 }
 
 button[onclick*="delete"]:hover {
@@ -184,56 +213,133 @@ button[onclick*="delete"]:hover {
 /* Status & Average */
 .average {
     text-align: center;
-    font-size: 24px;
+    font-size: clamp(1.375rem, 5vw, 2rem);
     font-weight: bold;
-    margin: 25px 0;
-    padding: 20px;
+    margin: 1.5rem 0;
+    padding: clamp(1rem, 3vw, 1.5rem);
     background: linear-gradient(135deg, #660000, #330000);
-    border-radius: 15px;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+    border-radius: 0.9375rem;
+    box-shadow: 0 0.375rem 1.25rem rgba(0,0,0,0.4);
 }
 
 .result-status {
     text-align: center;
-    font-size: 28px;
+    font-size: clamp(1.5rem, 5vw, 2rem);
     font-weight: bold;
-    margin: 20px 0;
-    padding: 20px;
-    border-radius: 15px;
-    min-height: 50px;
+    margin: 1.25rem 0;
+    padding: clamp(1rem, 3vw, 1.5rem);
+    border-radius: 0.9375rem;
+    min-height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
+
+.final-grade.passed { color: #00ff88 !important; }
+.final-grade.failed { color: #ff4444 !important; }
 
 /* Notification */
 .notification {
     position: fixed;
-    bottom: 40px;
+    bottom: 2.5rem;
     left: 50%;
     transform: translateX(-50%) translateY(100px);
     background: linear-gradient(135deg, #1487d4, #0f5fa3);
     color: white;
-    padding: 15px 30px;
-    border-radius: 15px;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+    padding: clamp(0.875rem, 2vw, 1rem) clamp(1.875rem, 8vw, 3rem);
+    border-radius: 0.9375rem;
+    box-shadow: 0 0.5rem 1.5625rem rgba(0,0,0,0.5);
     font-weight: 600;
-    font-size: 16px;
+    font-size: clamp(0.9375rem, 2.5vw, 1.125rem);
     opacity: 0;
     transition: all 0.4s ease;
     z-index: 1000;
     max-width: 90vw;
     text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
-/* Responsive */
-@media (max-width: 1200px) {
-    .container { margin: 20px; padding: 20px; }
-    table { min-width: 900px; }
+/* MOBILE-FIRST: Base is mobile */
+
+/* Small mobile+ to tablet */
+@media (min-width: 480px) {
+    .edit-student {
+        flex-direction: row;
+        justify-content: center;
+    }
+    
+    .edit-student input {
+        width: auto;
+        min-width: 12rem;
+    }
+    
+    table { min-width: 50rem; }
 }
 
-@media (max-width: 768px) {
-    .logo-container img { height: 50px; }
-    header h1 { font-size: 22px; }
-    th, td { padding: 8px 4px; font-size: 12px; }
-    .edit-student input { display: block; margin: 10px auto; width: 90%; }
-    .calculate-btn { width: 90%; margin: 10px auto; display: block; }
-    .container { overflow-x: auto; }
+/* Tablet */
+@media (min-width: 768px) {
+    .logo-row {
+        flex-direction: row;
+    }
+    
+    header {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+    
+    header h1 {
+        flex: 1;
+        text-align: center;
+        margin: 0 1rem;
+    }
+    
+    .btn-group {
+        flex-direction: row;
+    }
+    
+    .calculate-btn, .back-btn {
+        flex: none;
+    }
+    
+    .table-wrapper table {
+        min-width: 60rem;
+    }
+    
+    th, td {
+        padding: 0.75rem 0.625rem;
+    }
+}
+
+/* Desktop */
+@media (min-width: 1024px) {
+    .container {
+        padding: 2.5rem;
+    }
+    
+    table {
+        min-width: 70rem;
+    }
+}
+
+/* Large Desktop */
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1200px;
+        padding: 3rem;
+    }
+    
+    header {
+        padding: 2rem;
+    }
+    
+    .logo-container img {
+        height: 5.5rem;
+    }
+    
+    table {
+        min-width: 80rem;
+    }
 }
