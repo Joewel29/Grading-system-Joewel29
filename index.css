@@ -1,0 +1,239 @@
+* { 
+    box-sizing: border-box; 
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #fff;
+    background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('PCC background.jpg') center/cover fixed;
+    min-height: 100vh;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(128,0,0,0.7);
+    z-index: -1;
+}
+
+/* Header - Consistent */
+header {
+    background: linear-gradient(135deg, #990000 0%, #660000 100%);
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+}
+
+.logo-container {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    margin: 10px;
+}
+
+.logo-container img {
+    height: 70px;
+    border-radius: 12px;
+    border: 3px solid rgba(255,255,255,0.3);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.logo-text {
+    font-size: 16px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+header h1 {
+    margin: 15px 0;
+    font-size: 28px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+}
+
+/* Container */
+.container {
+    max-width: 1400px;
+    margin: 30px auto;
+    background: rgba(153,0,0,0.92);
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+}
+
+/* Inputs */
+.edit-student {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.edit-student input {
+    padding: 12px;
+    border-radius: 10px;
+    border: none;
+    font-size: 16px;
+    background: rgba(255,255,255,0.9);
+    color: #333;
+    margin: 0 10px;
+    min-width: 200px;
+}
+
+.student-info {
+    text-align: center;
+    margin: 20px 0;
+    font-size: 18px;
+    font-weight: 500;
+    padding: 15px;
+    background: rgba(102,0,0,0.5);
+    border-radius: 10px;
+}
+
+/* Table General */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    border-radius: 12px;
+    overflow: hidden;
+    min-width: 1000px;
+}
+
+th, td {
+    padding: 12px 8px;
+    text-align: center;
+    border-bottom: 1px solid rgba(255,255,255,0.3);
+}
+
+th {
+    background: linear-gradient(135deg, #660000, #330000);
+    font-weight: 600;
+    font-size: 14px;
+    position: sticky;
+    top: 0;
+    z-index: 5;
+}
+
+/* Grading Table */
+#gradeTable input[type="number"] {
+    width: 70px;
+    padding: 6px;
+    border-radius: 6px;
+    border: none;
+    text-align: center;
+}
+
+/* Records Viewer Table */
+#recordTable th:nth-child(1) { width: 15%; }
+#recordTable th:nth-child(2) { width: 10%; }
+#recordTable th:nth-child(3) { width: 10%; }  /* Quiz */
+#recordTable th:nth-child(4) { width: 10%; }  /* Lab */
+#recordTable th:nth-child(5) { width: 9%; }   /* Assign */
+#recordTable th:nth-child(6) { width: 9%; }   /* Attend */
+#recordTable th:nth-child(7) { width: 10%; }  /* Major */
+#recordTable th:nth-child(8) { width: 12%; }  /* Final */
+#recordTable th:nth-child(9) { width: 10%; }  /* Action */
+
+.final-grade.passed { color: #00ff88 !important; font-weight: bold; }
+.final-grade.failed { color: #ff4444 !important; font-weight: bold; }
+
+tbody tr:hover {
+    background: rgba(255,255,255,0.15);
+    transform: scale(1.01);
+    transition: all 0.2s;
+}
+
+/* Buttons */
+.calculate-btn, .back-btn {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #330000, #220000);
+    color: white;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    margin: 8px;
+    transition: all 0.3s;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.calculate-btn:hover, .back-btn:hover {
+    background: linear-gradient(135deg, #440000, #330000);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+}
+
+button[onclick*="delete"] {
+    background: linear-gradient(135deg, #cc0000, #990000) !important;
+    padding: 8px 16px;
+    font-size: 13px;
+}
+
+button[onclick*="delete"]:hover {
+    background: linear-gradient(135deg, #ff4444, #cc0000) !important;
+}
+
+/* Status & Average */
+.average {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    margin: 25px 0;
+    padding: 20px;
+    background: linear-gradient(135deg, #660000, #330000);
+    border-radius: 15px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+}
+
+.result-status {
+    text-align: center;
+    font-size: 28px;
+    font-weight: bold;
+    margin: 20px 0;
+    padding: 20px;
+    border-radius: 15px;
+    min-height: 50px;
+}
+
+/* Notification */
+.notification {
+    position: fixed;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background: linear-gradient(135deg, #1487d4, #0f5fa3);
+    color: white;
+    padding: 15px 30px;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+    font-weight: 600;
+    font-size: 16px;
+    opacity: 0;
+    transition: all 0.4s ease;
+    z-index: 1000;
+    max-width: 90vw;
+    text-align: center;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .container { margin: 20px; padding: 20px; }
+    table { min-width: 900px; }
+}
+
+@media (max-width: 768px) {
+    .logo-container img { height: 50px; }
+    header h1 { font-size: 22px; }
+    th, td { padding: 8px 4px; font-size: 12px; }
+    .edit-student input { display: block; margin: 10px auto; width: 90%; }
+    .calculate-btn { width: 90%; margin: 10px auto; display: block; }
+    .container { overflow-x: auto; }
+}
