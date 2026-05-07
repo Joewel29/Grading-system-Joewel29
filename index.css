@@ -477,5 +477,12 @@ button[onclick*="delete"]:hover {
     .grading-table input[type="number"]{
         max-width:80px;
         font-size:14px;
+        
     }
+}
+.table-title{
+    text-align:center;
+    margin-bottom:20px;
+    font-size:32px;
+    font-weight:bold;
 }
