@@ -114,5 +114,102 @@ function showNotification(msg, duration = 3000) {
         notif.style.transform = 'translateX(-50%) translateY(50px)';
     }, duration);
 }
+function addItem(type){
 
+    const container =
+        document.getElementById(type + 'Container');
+
+    const count =
+        container.children.length + 1;
+
+    let label = '';
+
+    if(type === 'quiz') label = 'Q';
+    if(type === 'lab') label = 'L';
+    if(type === 'assignment') label = 'A';
+
+    const div = document.createElement('div');
+
+    div.className = 'item-row';
+
+    div.innerHTML = `
+
+        <span class="item-label">
+            ${label}${count}
+        </span>
+
+        <input type="number"
+               class="score-input ${type}-input"
+               placeholder="Score"
+               min="0"
+               max="100"
+               oninput="updateTotal('${type}')">
+
+        <span class="over-text">/100</span>
+
+        <button class="remove-btn"
+                onclick="removeItem(this,'${type}')">
+            ×
+        </button>
+    `;
+
+    container.appendChild(div);
+}
+
+function removeItem(button, type){
+
+    button.parentElement.remove();
+
+    updateTotal(type);
+}
+
+function updateTotal(type){
+
+    const inputs =
+        document.querySelectorAll(`.${type}-input`);
+
+    let total = 0;
+    let count = 0;
+
+    inputs.forEach(input => {
+
+        const value = parseFloat(input.value);
+
+        if(!isNaN(value)){
+            total += value;
+            count++;
+        }
+    });
+
+    // SHOW TOTAL IN TOP TABLE
+    let totalId = '';
+
+    if(type === 'quiz') totalId = 'quizTotal';
+    if(type === 'lab') totalId = 'labTotal';
+    if(type === 'assignment') totalId = 'assignmentTotal';
+
+    document.getElementById(totalId).innerText = total;
+
+    // COMPUTE AVERAGE
+    let average = count > 0 ? total / count : 0;
+
+    // AUTO APPEAR IN GRADE (%) TABLE
+    const gradeInputs =
+        document.querySelectorAll('#gradeTable .score');
+
+    if(type === 'quiz'){
+        gradeInputs[0].value = average.toFixed(2);
+    }
+
+    if(type === 'lab'){
+        gradeInputs[1].value = average.toFixed(2);
+    }
+
+    if(type === 'assignment'){
+        gradeInputs[2].value = average.toFixed(2);
+    }
+
+    // AUTO COMPUTE WEIGHTED
+    calculateAverage();
+}
 window.onload = () => {}; // Init listeners already added
