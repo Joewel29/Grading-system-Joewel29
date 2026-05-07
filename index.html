@@ -2,9 +2,10 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>IT Department Grading System</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="index.css">
+
 </head>
 <body>
 
@@ -32,8 +33,175 @@
         <strong>Student Name:</strong> <span id="displayName">-</span> |
         <strong>Section:</strong> <span id="displaySection">-</span>
     </div>
+    <!-- COMPONENT TABLE -->
+<div class="component-section">
 
-    <table>
+    <h2 class="table-title">Component Breakdown</h2>
+
+    <div class="table-wrapper">
+
+        <table class="component-table">
+
+            <thead>
+                <tr>
+                    <th>Component</th>
+                    <th>Items</th>
+                    <th>Total Score</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                <!-- QUIZ -->
+                <tr>
+
+                    <td class="component-name">
+                        Quiz
+                    </td>
+
+                    <td>
+
+                        <div id="quizContainer">
+
+                            <div class="item-row">
+
+                                <span class="item-label">Q1</span>
+
+                                <input type="number"
+                                       class="score-input quiz-input"
+                                       placeholder="Score"
+                                       min="0"
+                                       max="100"
+                                       oninput="updateTotal('quiz')">
+
+                                <span class="over-text">/100</span>
+
+                                <button class="remove-btn"
+                                        onclick="removeItem(this,'quiz')">
+                                    ×
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                        <button class="add-btn"
+                                onclick="addItem('quiz')">
+                            + Add Quiz
+                        </button>
+
+                    </td>
+
+                    <td id="quizTotal">
+                        0
+                    </td>
+
+                </tr>
+
+                <!-- LABORATORY -->
+                <tr>
+
+                    <td class="component-name">
+                        Laboratory
+                    </td>
+
+                    <td>
+
+                        <div id="labContainer">
+
+                            <div class="item-row">
+
+                                <span class="item-label">L1</span>
+
+                                <input type="number"
+                                       class="score-input lab-input"
+                                       placeholder="Score"
+                                       min="0"
+                                       max="100"
+                                       oninput="updateTotal('lab')">
+
+                                <span class="over-text">/100</span>
+
+                                <button class="remove-btn"
+                                        onclick="removeItem(this,'lab')">
+                                    ×
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                        <button class="add-btn"
+                                onclick="addItem('lab')">
+                            + Add Lab
+                        </button>
+
+                    </td>
+
+                    <td id="labTotal">
+                        0
+                    </td>
+
+                </tr>
+
+                <!-- ASSIGNMENT -->
+                <tr>
+
+                    <td class="component-name">
+                        Assignment
+                    </td>
+
+                    <td>
+
+                        <div id="assignmentContainer">
+
+                            <div class="item-row">
+
+                                <span class="item-label">A1</span>
+
+                                <input type="number"
+                                       class="score-input assignment-input"
+                                       placeholder="Score"
+                                       min="0"
+                                       max="100"
+                                       oninput="updateTotal('assignment')">
+
+                                <span class="over-text">/100</span>
+
+                                <button class="remove-btn"
+                                        onclick="removeItem(this,'assignment')">
+                                    ×
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                        <button class="add-btn"
+                                onclick="addItem('assignment')">
+                            + Add Assignment
+                        </button>
+
+                    </td>
+
+                    <td id="assignmentTotal">
+                        0
+                    </td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+    <div class="table-wrapper">
+
+    <table class="grading-table">
+
         <thead>
             <tr>
                 <th>Component</th>
@@ -43,14 +211,104 @@
                 <th>Remarks</th>
             </tr>
         </thead>
+
         <tbody id="gradeTable">
-            <tr><td>Quiz</td><td>20%</td><td><input type="number" class="score" min="0" max="100" oninput="calculateAverage()"></td><td class="weighted">-</td><td class="remark"></td></tr>
-            <tr><td>Laboratory</td><td>30%</td><td><input type="number" class="score" min="0" max="100" oninput="calculateAverage()"></td><td class="weighted">-</td><td class="remark"></td></tr>
-            <tr><td>Assignment</td><td>10%</td><td><input type="number" class="score" min="0" max="100" oninput="calculateAverage()"></td><td class="weighted">-</td><td class="remark"></td></tr>
-            <tr><td>Attendance</td><td>10%</td><td><input type="number" class="score" min="0" max="100" oninput="calculateAverage()"></td><td class="weighted">-</td><td class="remark"></td></tr>
-            <tr><td>Major Exam</td><td>30%</td><td><input type="number" class="score" min="0" max="100" oninput="calculateAverage()"></td><td class="weighted">-</td><td class="remark"></td></tr>
+
+            <tr>
+                <td>Quiz</td>
+
+                <td>20%</td>
+
+                <td>
+                    <input type="number"
+                           class="score"
+                           min="0"
+                           max="100"
+                           oninput="calculateAverage()">
+                </td>
+
+                <td class="weighted">-</td>
+
+                <td class="remark"></td>
+            </tr>
+
+            <tr>
+                <td>Laboratory</td>
+
+                <td>30%</td>
+
+                <td>
+                    <input type="number"
+                           class="score"
+                           min="0"
+                           max="100"
+                           oninput="calculateAverage()">
+                </td>
+
+                <td class="weighted">-</td>
+
+                <td class="remark"></td>
+            </tr>
+
+            <tr>
+                <td>Assignment</td>
+
+                <td>10%</td>
+
+                <td>
+                    <input type="number"
+                           class="score"
+                           min="0"
+                           max="100"
+                           oninput="calculateAverage()">
+                </td>
+
+                <td class="weighted">-</td>
+
+                <td class="remark"></td>
+            </tr>
+
+            <tr>
+                <td>Attendance</td>
+
+                <td>10%</td>
+
+                <td>
+                    <input type="number"
+                           class="score"
+                           min="0"
+                           max="100"
+                           oninput="calculateAverage()">
+                </td>
+
+                <td class="weighted">-</td>
+
+                <td class="remark"></td>
+            </tr>
+
+            <tr>
+                <td>Major Exam</td>
+
+                <td>30%</td>
+
+                <td>
+                    <input type="number"
+                           class="score"
+                           min="0"
+                           max="100"
+                           oninput="calculateAverage()">
+                </td>
+
+                <td class="weighted">-</td>
+
+                <td class="remark"></td>
+            </tr>
+
         </tbody>
+
     </table>
+
+</div>
 
     <div style="text-align:center;">
         <button class="calculate-btn" onclick="saveRecord()">Save Record</button>
@@ -68,4 +326,3 @@
 </div>
 <script src="index.js"></script>
 </body>
-</html>
