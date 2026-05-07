@@ -486,3 +486,15 @@ button[onclick*="delete"]:hover {
     font-size:32px;
     font-weight:bold;
 }
+.table-title{
+    width:100%;
+    text-align:center;
+    display:block;
+    margin:0 auto 20px auto;
+    font-size:32px;
+    font-weight:bold;
+}
+.component-section{
+    width:100%;
+    text-align:center;
+}
