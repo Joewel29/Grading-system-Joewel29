@@ -343,3 +343,139 @@ button[onclick*="delete"]:hover {
         min-width: 80rem;
     }
 }
+.component-table{
+    width:100%;
+    border-collapse:collapse;
+    overflow:hidden;
+    border-radius:15px;
+}
+
+.component-table th{
+    background:#5b0000;
+    padding:18px;
+    font-size:18px;
+}
+
+.component-table td{
+    padding:20px;
+    border-bottom:1px solid rgba(255,255,255,0.2);
+    text-align:center;
+}
+
+.component-name{
+    font-size:20px;
+    font-weight:bold;
+}
+
+.item-row{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    background:#8b0000;
+    padding:14px;
+    border-radius:12px;
+    margin-bottom:10px;
+}
+
+.item-label{
+    font-weight:bold;
+    min-width:40px;
+}
+
+.score-input{
+    width:120px;
+    padding:10px;
+    border:none;
+    border-radius:6px;
+    font-size:16px;
+}
+
+.over-text{
+    font-weight:bold;
+}
+
+.add-btn{
+    background:#3b0000;
+    color:white;
+    border:none;
+    padding:10px 18px;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:bold;
+    margin-top:10px;
+}
+
+.add-btn:hover{
+    background:#550000;
+}
+
+.remove-btn{
+    background:red;
+    color:white;
+    border:none;
+    width:30px;
+    height:30px;
+    border-radius:6px;
+    cursor:pointer;
+    font-weight:bold;
+}
+/* FIXED RESPONSIVE GRADING TABLE */
+
+.grading-table{
+    width:100%;
+    min-width:700px;
+    border-collapse:collapse;
+    table-layout:fixed;
+}
+
+.grading-table th,
+.grading-table td{
+    padding:14px;
+    text-align:center;
+    word-wrap:break-word;
+}
+
+.grading-table th{
+    background:linear-gradient(135deg,#5b0000,#330000);
+    font-size:16px;
+}
+
+.grading-table td{
+    background:rgba(255,255,255,0.03);
+}
+
+.grading-table input[type="number"]{
+    width:100%;
+    max-width:100px;
+    padding:8px;
+    border:none;
+    border-radius:6px;
+    text-align:center;
+    font-size:15px;
+}
+
+/* RESPONSIVE MOBILE FIX */
+.table-wrapper{
+    width:100%;
+    overflow-x:auto;
+    border-radius:15px;
+}
+
+/* MOBILE */
+@media(max-width:768px){
+
+    .grading-table{
+        min-width:650px;
+    }
+
+    .grading-table th,
+    .grading-table td{
+        padding:10px;
+        font-size:14px;
+    }
+
+    .grading-table input[type="number"]{
+        max-width:80px;
+        font-size:14px;
+    }
+}
